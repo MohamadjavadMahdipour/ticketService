@@ -18,7 +18,7 @@ export class User {
   @Column({ type: 'varchar', length: 255 })
   username: string;
 
-  @Column({ type: 'varchar', length: 50, default: 'status' })
+  @Column({ type: 'varchar', length: 50,nullable:true })
   rank: string;
 
   @Column({ type: 'datetime', nullable: true })
