@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Ticket } from 'src/tickets/entities/ticket.entity/ticket.entity';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -17,7 +18,7 @@ export class User {
   @Column({ type: 'varchar', length: 255 })
   username: string;
 
-  @Column({ type: 'varchar', length: 50})
+  @Column({ type: 'varchar', length: 50, default: 'status' })
   rank: string;
 
   @Column({ type: 'datetime', nullable: true })
@@ -97,4 +98,6 @@ export class User {
 
   @CreateDateColumn({ type: 'datetime', name: 'date_joined' })
   date_joined: Date;
+  @OneToMany(() => Ticket, (ticket) => ticket.owner)
+  tickets: Ticket[];
 }
