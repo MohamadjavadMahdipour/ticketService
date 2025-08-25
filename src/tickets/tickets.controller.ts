@@ -13,6 +13,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiTags, ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { CreateFirstTicketDto } from './dto/create-first-ticket.dto';
 import { AddTicketToChatDto } from './dto/add-ticket-to-chat.dto';
+import { multerConfig } from 'src/config/multer.config';
 
 @ApiTags('tickets')
 @Controller('tickets')
@@ -23,7 +24,7 @@ export class TicketsController {
    * Create first ticket (auto-create chat)
    */
   @Post('create-first-ticket')
-  @UseInterceptors(FilesInterceptor('files', 10))
+  @UseInterceptors(FilesInterceptor('files', 10,multerConfig))
   @ApiConsumes('multipart/form-data')
   @ApiBody({ type: CreateFirstTicketDto })
   async createFirstTicket(
@@ -38,7 +39,7 @@ export class TicketsController {
    * Add a ticket to an existing chat
    */
   @Post('chat/add-ticket')
-  @UseInterceptors(FilesInterceptor('files', 10))
+  @UseInterceptors(FilesInterceptor('files', 10,multerConfig))
   @ApiConsumes('multipart/form-data')
   @ApiBody({ type: AddTicketToChatDto })
   async addTicketToChat(
