@@ -28,11 +28,15 @@ export class TicketsController {
   @ApiConsumes('multipart/form-data')
   @ApiBody({ type: CreateTicketDtoWithFiles })
   async createFirstTicket(
-    @Body() dto: CreateTicketDto,
+    @Body() body: any,
     @UploadedFiles() files?: Express.Multer.File[],
   ) {
-    const { ownerId, title, mainText } = dto;
-    console.log("inController",ownerId,title,mainText);
+  const ownerId = Number(body.ownerId); // convert to number manually
+  const title = body.title;
+  const mainText = body.mainText;
+
+   console.log('inController', ownerId, title, mainText, files?.length);
+    
     
     return this.ticketsService.createFirstTicket(ownerId, title, mainText, files);
   }
@@ -45,7 +49,7 @@ export class TicketsController {
   @ApiConsumes('multipart/form-data')
   @ApiBody({ type: CreateTicketDtoWithFilesForAdd })
   async addTicketToChat(
-    @Body() dto: AddTicketToChatDto,
+    @Body() dto: any,
     @UploadedFiles() files?: Express.Multer.File[],
   ) {
     const { chatId, ownerId, title, mainText } = dto;
