@@ -14,7 +14,7 @@ import { File } from './files/entities/file.entity/file.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '87.107.165.158',  
+      host: '194.60.230.40',  
       port: 3306,
       username: 'remote_user2',
       password: '@Aram830908',
