@@ -18,7 +18,7 @@ export class AddTicketToChatDto {
   @IsNotEmpty()
   mainText: string;
 }
-export class CreateTicketDtoWithFiles extends AddTicketToChatDto {
+export class CreateTicketDtoWithFilesForAdd extends AddTicketToChatDto {
   @ApiProperty({ type: 'array', items: { type: 'string', format: 'binary' }, required: false })
   files?: any[];
 }
