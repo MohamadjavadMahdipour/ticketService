@@ -18,7 +18,7 @@ import { File } from './files/entities/file.entity/file.entity';
       port: 3306,
       username: 'remote_user2',
       password: '@Aram830908',
-      database: 'Ghestila_Panel',
+      database: 'Ghestila',
       entities: [Ticket,Chat,File,User],
       synchronize: true, // ❌ disable in production, use migrations
     }),
