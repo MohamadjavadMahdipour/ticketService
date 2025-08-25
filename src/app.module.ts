@@ -14,9 +14,9 @@ import { File } from './files/entities/file.entity/file.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: '87.107.165.158',
       port: 3306,
-      username: 'root',
+      username: 'remote_user',
       password: '@Aram830908',
       database: 'Ghestila_Panel',
       entities: [Ticket,Chat,File,User],
