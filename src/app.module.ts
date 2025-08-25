@@ -20,7 +20,7 @@ import { File } from './files/entities/file.entity/file.entity';
       password: '@Aram830908',
       database: 'Ghestila',
       entities: [Ticket,Chat,File,User],
-      synchronize: true, // ❌ disable in production, use migrations
+      synchronize:false , // ❌ disable in production, use migrations
     }),
 
     MulterModule.register({
