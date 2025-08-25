@@ -29,6 +29,7 @@ export class TicketsService {
   mainText: string,
   files?: Express.Multer.File[],
 ) {
+  console.log(ownerId,title,mainText)
   // Find the user
   const owner = await this.userRepository.findOneBy({ id: ownerId });
   if (!owner) throw new NotFoundException('User not found');
