@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { TicketsService } from './tickets.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { ApiTags, ApiBody, ApiConsumes } from '@nestjs/swagger';
+import { ApiTags, ApiBody, ApiConsumes, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { CreateTicketDto, CreateTicketDtoWithFiles } from './dto/create-first-ticket.dto';
 import { AddTicketToChatDto , CreateTicketDtoWithFilesForAdd} from './dto/add-ticket-to-chat.dto';
 import { multerConfig } from 'src/config/multer.config';
@@ -72,5 +72,12 @@ export class TicketsController {
   @Get('chat/:chatId')
   async getChatById(@Param('chatId', ParseIntPipe) chatId: number) {
     return this.ticketsService.getChatById(chatId);
+  }
+
+  @Post('chat/:chatId/close')
+  @ApiOperation({ summary: 'Close a chat' })
+  @ApiParam({ name: 'chatId', type: Number })
+  async closeChat(@Param('chatId') chatId: number) {
+  return this.ticketsService.closeChat(chatId);
   }
 }

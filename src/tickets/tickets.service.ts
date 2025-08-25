@@ -150,5 +150,16 @@ async getChatById(chatId: number) {
 
   return chat;
 }
+async closeChat(chatId: number) {
+    const chat = await this.chatRepository.findOne({ where: { id: chatId } });
+    if (!chat) {
+      throw new NotFoundException('Chat not found');
+    }
+
+    chat.status = 'closed';
+    await this.chatRepository.save(chat);
+
+    return { message: 'Chat closed successfully', chatId: chat.id, status: chat.status };
+  }
 
 }
