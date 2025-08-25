@@ -32,6 +32,8 @@ export class TicketsController {
     @UploadedFiles() files?: Express.Multer.File[],
   ) {
     const { ownerId, title, mainText } = dto;
+    console.log("inController",ownerId,title,mainText);
+    
     return this.ticketsService.createFirstTicket(ownerId, title, mainText, files);
   }
 
