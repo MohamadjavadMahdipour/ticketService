@@ -1,16 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsNotEmpty } from 'class-validator';
 
-export class CreateFirstTicketDto {
-  @ApiProperty({ description: 'ID of the ticket owner' })
-  @IsInt()
+export class CreateTicketDto {
+  @ApiProperty()
   ownerId: number;
 
-  @ApiProperty({ description: 'Ticket title' })
-  @IsNotEmpty()
+  @ApiProperty()
   title: string;
 
-  @ApiProperty({ description: 'Ticket main text' })
-  @IsNotEmpty()
+  @ApiProperty()
   mainText: string;
+}
+
+// For Swagger to show file upload
+export class CreateTicketDtoWithFiles extends CreateTicketDto {
+  @ApiProperty({ type: 'array', items: { type: 'string', format: 'binary' }, required: false })
+  files?: any[];
 }

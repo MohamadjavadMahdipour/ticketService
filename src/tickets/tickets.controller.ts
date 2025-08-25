@@ -11,8 +11,8 @@ import {
 import { TicketsService } from './tickets.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiTags, ApiBody, ApiConsumes } from '@nestjs/swagger';
-import { CreateFirstTicketDto } from './dto/create-first-ticket.dto';
-import { AddTicketToChatDto } from './dto/add-ticket-to-chat.dto';
+import { CreateTicketDto, CreateTicketDtoWithFiles } from './dto/create-first-ticket.dto';
+import { AddTicketToChatDto , CreateTicketDtoWithFilesForAdd} from './dto/add-ticket-to-chat.dto';
 import { multerConfig } from 'src/config/multer.config';
 
 @ApiTags('tickets')
@@ -26,9 +26,9 @@ export class TicketsController {
   @Post('create-first-ticket')
   @UseInterceptors(FilesInterceptor('files', 10,multerConfig))
   @ApiConsumes('multipart/form-data')
-  @ApiBody({ type: CreateFirstTicketDto })
+  @ApiBody({ type: CreateTicketDtoWithFiles })
   async createFirstTicket(
-    @Body() dto: CreateFirstTicketDto,
+    @Body() dto: CreateTicketDto,
     @UploadedFiles() files?: Express.Multer.File[],
   ) {
     const { ownerId, title, mainText } = dto;
@@ -41,7 +41,7 @@ export class TicketsController {
   @Post('chat/add-ticket')
   @UseInterceptors(FilesInterceptor('files', 10,multerConfig))
   @ApiConsumes('multipart/form-data')
-  @ApiBody({ type: AddTicketToChatDto })
+  @ApiBody({ type: CreateTicketDtoWithFilesForAdd })
   async addTicketToChat(
     @Body() dto: AddTicketToChatDto,
     @UploadedFiles() files?: Express.Multer.File[],
