@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MulterModule } from '@nestjs/platform-express';
 import { join } from 'path';
@@ -9,6 +9,7 @@ import { User } from './users/entities/user.entity/user.entity';
 import { Ticket } from './tickets/entities/ticket.entity/ticket.entity';
 import { Chat } from './chats/entities/chat.entity/chat.entity';
 import { File } from './files/entities/file.entity/file.entity';
+import { LoggerMiddleware } from './middelware/logger.middleware';
 
 @Module({
   imports: [
@@ -35,6 +36,15 @@ import { File } from './files/entities/file.entity/file.entity';
 
     TicketsModule,
     TypeOrmModule.forFeature([User]),
+    
   ],
+  
 })
-export class AppModule {}
+
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*'); // apply to all routes
+  }
+}
+
+
