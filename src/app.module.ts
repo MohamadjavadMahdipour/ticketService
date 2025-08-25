@@ -10,6 +10,7 @@ import { Ticket } from './tickets/entities/ticket.entity/ticket.entity';
 import { Chat } from './chats/entities/chat.entity/chat.entity';
 import { File } from './files/entities/file.entity/file.entity';
 import { LoggerMiddleware } from './middelware/logger.middleware';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -35,7 +36,8 @@ import { LoggerMiddleware } from './middelware/logger.middleware';
     }),
 
     TicketsModule,
-    TypeOrmModule.forFeature([User]),
+    UsersModule,
+    TypeOrmModule.forFeature([User,Ticket,File,Chat]),
     
   ],
   
